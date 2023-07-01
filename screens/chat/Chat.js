@@ -1,7 +1,7 @@
 import React, { useState, useCallback, useEffect } from "react";
 import { Dialogflow_V2 } from "react-native-dialogflow";
 import { AgentConfig } from "../AgentConfig";
-import { GiftedChat, Send } from "react-native-gifted-chat";
+import { Bubble, GiftedChat, Send } from "react-native-gifted-chat";
 import { View, Text } from "react-native";
 
 export function Chat() {
@@ -15,7 +15,7 @@ export function Chat() {
     {
       _id: 3,
       text: `Qual procedimento gostaria de realizar hoje?`,
-      createdAt: new Date(),
+      createdAt: new Date().getTime(),
       quickReplies: {
         type: "checkbox", // or 'checkbox',
         keepIt: false,
@@ -35,13 +35,13 @@ export function Chat() {
     {
       _id: 2,
       text: "Me chamo Lula, seu assistente virtual.",
-      createdAt: new Date(),
+      createdAt: new Date().getTime(),
       user: Bot,
     },
     {
       _id: 1,
       text: "Olá, Seja Bem Vindo!",
-      createdAt: new Date(),
+      createdAt: new Date().getTime(),
       user: Bot,
     },
   ]);
@@ -98,10 +98,20 @@ export function Chat() {
     onSend([msg]);
   };
 
+  const renderBobble = (props) => {
+    return (
+      <Bubble
+        {...props}
+        textStyle={{ left: { color: "white", fontSize: 16 } }}
+        wrapperStyle={{ left: { backgroundColor: "#A24AFA" } }}
+      />
+    );
+  };
+
   return (
     <GiftedChat
-    bottomOffset={50}
       alwaysShowSend
+      renderBubble={renderBobble}
       messages={messages}
       onQuickReply={(props) => onQuickReply(props)}
       onSend={(messages) => onSend(messages)}

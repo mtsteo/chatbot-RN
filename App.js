@@ -1,29 +1,21 @@
-import { Chat } from './screens/chat/Chat';
-import { createStackNavigator } from '@react-navigation/stack';
-import { NavigationContainer } from '@react-navigation/native';
+import { Chat } from "./screens/chat/Chat";
+import { LoginScreen } from "./screens/login/LoginScreen";
+import { createStackNavigator } from "@react-navigation/stack";
+import { NavigationContainer } from "@react-navigation/native";
 
-const Stack = createStackNavigator()
+const Stack = createStackNavigator();
 
-function StackChat (){
-  return(
-    <Stack.Navigator>
-      <Stack.Screen name='Chatbot' component={Chat}/>
-    </Stack.Navigator>
-  )
-}
-
-function RootNavigator(){
-  return(
-    <NavigationContainer>
-      <StackChat/>
-    </NavigationContainer>
-  )
-}
-
-
-export default function App() {
+function RootNavigator() {
   return (
-    <RootNavigator/>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Login">
+        <Stack.Screen name="Login" component={LoginScreen} options={{headerShown:false}} />
+        <Stack.Screen name="Chatbot" component={Chat} options={{title:"Assistente"} } />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
+export default function App() {
+  return <RootNavigator />;
+}
