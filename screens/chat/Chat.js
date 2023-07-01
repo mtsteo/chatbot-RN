@@ -1,6 +1,6 @@
 import React, { useState, useCallback, useEffect } from "react";
 import { Dialogflow_V2 } from "react-native-dialogflow";
-import { AgentConfig } from "../AgentConfig";
+import { AgentConfig } from "../../Utils/AgentConfig";
 import { Bubble, GiftedChat, Send } from "react-native-gifted-chat";
 import { View, Text } from "react-native";
 
@@ -63,6 +63,7 @@ export function Chat() {
     Dialogflow_V2.requestQuery(
       msg,
       (result) => {
+        console.log('result', result);
         handleGoogleResponse(result);
       },
       (error) => {
