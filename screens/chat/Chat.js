@@ -2,7 +2,7 @@ import React, { useState, useCallback, useEffect } from "react";
 import { Dialogflow_V2 } from "react-native-dialogflow";
 import { AgentConfig } from "../../Utils/AgentConfig";
 import { Bubble, GiftedChat, Send } from "react-native-gifted-chat";
-import { View, Text } from "react-native";
+import Maps from "../../components/Maps";
 
 export function Chat() {
   const Bot = {
@@ -63,7 +63,7 @@ export function Chat() {
     Dialogflow_V2.requestQuery(
       msg,
       (result) => {
-        console.log('result', result);
+        console.log("result", result);
         handleGoogleResponse(result);
       },
       (error) => {
@@ -100,6 +100,10 @@ export function Chat() {
   };
 
   const renderBobble = (props) => {
+    const { currentMessage } = props;
+    if (currentMessage.location) {
+      return <Maps location={currentMessage.location} />;
+    }
     return (
       <Bubble
         {...props}
@@ -116,15 +120,6 @@ export function Chat() {
       messages={messages}
       onQuickReply={(props) => onQuickReply(props)}
       onSend={(messages) => onSend(messages)}
-      // renderSend={(props) => {
-      //   return (
-      //     <Send {...props}>
-      //       <View style={{ marginRight: 10, marginBottom: 5 }}>
-      //         <Text>Enviar</Text>
-      //       </View>
-      //     </Send>
-      //   );
-      // }}
       user={{
         _id: 1,
       }}
