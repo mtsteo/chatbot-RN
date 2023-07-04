@@ -34,7 +34,7 @@ export function Chat() {
     },
     {
       _id: 2,
-      text: "Me chamo Lula, seu assistente virtual.",
+      text: "Me chamo Zé, seu assistente virtual.",
       createdAt: new Date().getTime(),
       user: Bot,
     },
