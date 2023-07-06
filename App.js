@@ -8,7 +8,7 @@ const Stack = createStackNavigator();
 function RootNavigator() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Chatbot">
+      <Stack.Navigator initialRouteName="Login">
         <Stack.Screen name="Login" component={LoginView} options={{headerShown:false}} />
         <Stack.Screen name="Chatbot" component={Chat} options={{title:"Assistente"} } />
       </Stack.Navigator>

@@ -11,6 +11,12 @@ export function Chat() {
     avatar: "https://cdn-icons-png.flaticon.com/512/1395/1395208.png ",
   };
 
+  const useProfile = {
+    _id: 1,
+    name: "User",
+    avatar: "https://cdn-icons-png.flaticon.com/512/4202/4202843.png",
+  };
+
   const [messages, setMessages] = useState([
     {
       _id: 3,
@@ -34,13 +40,13 @@ export function Chat() {
     },
     {
       _id: 2,
-      text: "Me chamo Zé, seu assistente virtual.",
+      text: "Me chamo Zé, seu assistente virtual!",
       createdAt: new Date().getTime(),
       user: Bot,
     },
     {
       _id: 1,
-      text: "Olá, Seja Bem Vindo!",
+      text: "Olá BELTRANO, Seja Bem Vindo!",
       createdAt: new Date().getTime(),
       user: Bot,
     },
@@ -72,17 +78,43 @@ export function Chat() {
     );
   };
 
-  const handleGoogleResponse = (result = []) => {
-    let text = result.queryResult.fulfillmentMessages[0].text.text[0];
-    sendBotResponse(text);
+  const handleGoogleResponse = (result) => {
+    let a = "";
+    if (result.queryResult.fulfillmentMessages[0].payload) {
+      a = result.queryResult.fulfillmentMessages[0].payload;
+    } else if (!result.queryResult.fulfillmentMessages[0].payload) {
+      a = false;
+    }
+    // let options = result.queryResult.fulfillmentMessages[0].payload.element;
+    let text = result.queryResult.fulfillmentText;
+
+    sendBotResponse(text, a);
   };
 
-  const sendBotResponse = (text = []) => {
+  const sendBotResponse = (text, options) => {
+    if (!options) {
+      let msg = {
+        _id: messages.length + 1,
+        text,
+        createdAt: new Date().getTime(),
+        user: Bot,
+      };
+      setMessages((previousMessages) => {
+        return GiftedChat.append(previousMessages, [msg]);
+      });
+    }
     let msg = {
       _id: messages.length + 1,
       text,
       createdAt: new Date(),
       user: Bot,
+      quickReplies: {
+        type: "checkbox",
+        keepIt: false,
+        values: options.map((a) => {
+          return { title: a.value, value: a.value };
+        }),
+      },
     };
     setMessages((previousMessages) => {
       return GiftedChat.append(previousMessages, [msg]);
@@ -93,8 +125,8 @@ export function Chat() {
     let msg = {
       _id: messages.length + 100000,
       text: props[0].value,
-      createdAt: new Date(),
-      user: Bot,
+      createdAt: new Date().getTime(),
+      user: useProfile,
     };
     onSend([msg]);
   };
@@ -115,14 +147,14 @@ export function Chat() {
 
   return (
     <GiftedChat
-      alwaysShowSend
+      showUserAvatar={true}
       renderBubble={renderBobble}
       messages={messages}
-      onQuickReply={(props) => onQuickReply(props)}
-      onSend={(messages) => onSend(messages)}
-      user={{
-        _id: 1,
+      onQuickReply={(props) => {
+        onQuickReply(props);
       }}
+      onSend={(messages) => onSend(messages)}
+      user={useProfile}
     />
   );
 }
