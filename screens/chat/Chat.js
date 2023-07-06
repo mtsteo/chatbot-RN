@@ -69,7 +69,6 @@ export function Chat() {
     Dialogflow_V2.requestQuery(
       msg,
       (result) => {
-        console.log("result", result);
         handleGoogleResponse(result);
       },
       (error) => {
@@ -81,18 +80,18 @@ export function Chat() {
   const handleGoogleResponse = (result) => {
     let a = "";
     if (result.queryResult.fulfillmentMessages[0].payload) {
-      a = result.queryResult.fulfillmentMessages[0].payload;
-    } else if (!result.queryResult.fulfillmentMessages[0].payload) {
-      a = false;
+      a = result.queryResult.fulfillmentMessages[0].payload.data;
+    }
+    if (!result.queryResult.fulfillmentMessages[0].payload) {
+      a = null;
     }
     // let options = result.queryResult.fulfillmentMessages[0].payload.element;
     let text = result.queryResult.fulfillmentText;
-
     sendBotResponse(text, a);
   };
 
   const sendBotResponse = (text, options) => {
-    if (!options) {
+    if (options == null) {
       let msg = {
         _id: messages.length + 1,
         text,
@@ -103,22 +102,24 @@ export function Chat() {
         return GiftedChat.append(previousMessages, [msg]);
       });
     }
-    let msg = {
-      _id: messages.length + 1,
-      text,
-      createdAt: new Date(),
-      user: Bot,
-      quickReplies: {
-        type: "checkbox",
-        keepIt: false,
-        values: options.map((a) => {
-          return { title: a.value, value: a.value };
-        }),
-      },
-    };
-    setMessages((previousMessages) => {
-      return GiftedChat.append(previousMessages, [msg]);
-    });
+    if (options != null) {
+      let msg = {
+        _id: messages.length + 1,
+        text,
+        createdAt: new Date(),
+        user: Bot,
+        quickReplies: {
+          type: "checkbox",
+          keepIt: false,
+          values: options.map((a) => {
+            return { title: a.value, value: a.value };
+          }),
+        },
+      };
+      setMessages((previousMessages) => {
+        return GiftedChat.append(previousMessages, [msg]);
+      });
+    }
   };
 
   const onQuickReply = (props) => {
