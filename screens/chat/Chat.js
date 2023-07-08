@@ -1,6 +1,6 @@
 import React, { useState, useCallback, useEffect } from "react";
 import { Dialogflow_V2 } from "react-native-dialogflow";
-import { AgentConfig } from "../../Utils/AgentConfig";
+import { AgentConfig } from "../../utils/AgentConfig";
 import { Bubble, GiftedChat, Send } from "react-native-gifted-chat";
 import Maps from "../../components/Maps";
 
@@ -80,7 +80,7 @@ export function Chat() {
   const handleGoogleResponse = (result) => {
     let a = "";
     if (result.queryResult.fulfillmentMessages[0].payload) {
-      a = result.queryResult.fulfillmentMessages[0].payload.data;
+      a = result.queryResult.fulfillmentMessages[0].payload.element;
     }
     if (!result.queryResult.fulfillmentMessages[0].payload) {
       a = null;

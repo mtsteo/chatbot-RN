@@ -16,7 +16,6 @@ export function LoginView({ navigation }) {
         onCpfChange={(value) => {
           setCpf(value);
         }}
-        cpfPlaceholder="oi"
         passwordPlaceholder="Digite sua senha..."
         onPasswordChange={(value)=>{setPassword(value)}}
         disableSocialButtons
