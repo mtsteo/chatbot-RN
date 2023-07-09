@@ -7,7 +7,7 @@ export function LoginView({ navigation }) {
   const [cpf, setCpf] = React.useState("");
 
   const loginHandle = () =>{
-    navigation.navigate("Chatbot")
+    navigation.navigate("Home")
   }
 
   return (

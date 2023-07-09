@@ -3,8 +3,9 @@ import { Dialogflow_V2 } from "react-native-dialogflow";
 import { AgentConfig } from "../../utils/AgentConfig";
 import { Bubble, GiftedChat, Send } from "react-native-gifted-chat";
 import Maps from "../../components/Maps";
+import Colors from "../../styles/Colors";
 
-export function Chat() {
+export function ChatAgendamento() {
   const Bot = {
     _id: 4,
     name: "Mr. Bot",
@@ -140,8 +141,18 @@ export function Chat() {
     return (
       <Bubble
         {...props}
-        textStyle={{ left: { color: "white", fontSize: 16 } }}
-        wrapperStyle={{ left: { backgroundColor: "#A24AFA" } }}
+        textStyle={{
+          left: { color: "white", fontSize: 16, fontWeight: 700 },
+          right: {
+            color: Colors.mainColors.textColors.textRight,
+            fontSize: 16,
+            fontWeight: 700,
+          },
+        }}
+        wrapperStyle={{
+          left: { backgroundColor: Colors.mainColors.bubbleLeft },
+          right: { backgroundColor: Colors.mainColors.bubbleRight },
+        }}
       />
     );
   };
