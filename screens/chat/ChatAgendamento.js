@@ -1,6 +1,5 @@
 import React, { useState, useCallback, useEffect } from "react";
 import { Dialogflow_V2 } from "react-native-dialogflow";
-import { AgentConfig } from "../../utils/AgentConfig";
 import { Bubble, GiftedChat, Send } from "react-native-gifted-chat";
 import Maps from "../../components/Maps";
 import Colors from "../../styles/Colors";
@@ -108,7 +107,14 @@ export function ChatAgendamento() {
           values: options.map((a) => {
             return { title: a.value, value: a.value };
           }),
-        },
+        }, // useEffect(() => {
+          //   Dialogflow_V2.setConfiguration(
+          //     AgentConfig.client_email,
+          //     AgentConfig.private_key,
+          //     Dialogflow_V2.LANG_PORTUGUESE_BRAZIL,
+          //     AgentConfig.project_id
+          //   );
+          // }, []);
       };
       setMessages((previousMessages) => {
         return GiftedChat.append(previousMessages, [msg]);
@@ -143,7 +149,7 @@ export function ChatAgendamento() {
           },
         }}
         wrapperStyle={{
-          left: { backgroundColor: Colors.mainColors.bubbleLeft },
+          left: { backgroundColor: Colors.mainColors.primary },
           right: { backgroundColor: Colors.mainColors.bubbleRight },
         }}
       />

@@ -78,7 +78,7 @@ const style = StyleSheet.create({
     width: "95%",
     alignItems: "center",
     flexDirection: "row",
-    borderBottomWidth: 1,
+    // borderBottomWidth: 1,
     marginLeft: "2%",
     marginTop: "2%",
   },

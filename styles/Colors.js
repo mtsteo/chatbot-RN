@@ -1,3 +1,5 @@
+
+// blackdefault: "#1C2120"
 export default {
   mainColors: {
     primary: "#1C2120",

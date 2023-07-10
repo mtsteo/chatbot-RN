@@ -1,6 +1,6 @@
 import * as React from "react";
 import LoginScreen from "react-native-login-screen";
-import { View, Text, Button } from "react-native";
+import Colors from "../../styles/Colors";
 
 export function LoginView({ navigation }) {
   const [password, setPassword] = React.useState("");
@@ -23,6 +23,7 @@ export function LoginView({ navigation }) {
         disableCpfValidation={true}
         disableSignup
         onLoginPress={loginHandle}
+        loginButtonStyle={{backgroundColor:Colors.mainColors.primary}}
       />
   );
 }
