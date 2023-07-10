@@ -53,14 +53,6 @@ export function ChatAgendamento() {
     },
   ]);
 
-  useEffect(() => {
-    Dialogflow_V2.setConfiguration(
-      AgentConfig.client_email,
-      AgentConfig.private_key,
-      Dialogflow_V2.LANG_PORTUGUESE_BRAZIL,
-      AgentConfig.project_id
-    );
-  }, []);
 
   const onSend = (message = []) => {
     setMessages((previousMessages) => {
@@ -79,6 +71,7 @@ export function ChatAgendamento() {
   };
 
   const handleGoogleResponse = (result) => {
+    console.log(result)
     let a = "";
     if (result.queryResult.fulfillmentMessages[0].payload) {
       a = result.queryResult.fulfillmentMessages[0].payload.element;

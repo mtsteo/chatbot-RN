@@ -2,6 +2,7 @@ import { ChatAgendamento } from "./screens/chat/ChatAgendamento";
 import { LoginView } from "./screens/login/LoginView";
 import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
+import AuthProvider from "./contexts/AuthProvider";
 import Home from "./screens/home/Home";
 import Colors from "./styles/Colors";
 
@@ -42,5 +43,9 @@ function RootNavigator() {
 }
 
 export default function App() {
-  return <RootNavigator />;
+  return (
+    <AuthProvider>
+      <RootNavigator />
+    </AuthProvider>
+  );
 }
